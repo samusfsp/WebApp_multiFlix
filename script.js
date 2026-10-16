@@ -480,7 +480,8 @@ async function handleSearch() {
         // Mostrar loading nos containers existentes
         document.getElementById('trending-movies').innerHTML = '<p class="loading">Buscando...</p>';
         document.getElementById('trending-tv').innerHTML = '<p class="loading">Buscando...</p>';
-        document.getElementById('weekly-trending').innerHTML = '<p class="loading">Buscando...</p>';
+        document.getElementById('weekly-movies').innerHTML = '<p class="loading">Buscando...</p>';
+        document.getElementById('weekly-tv').innerHTML = '<p class="loading">Buscando...</p>';
        
         // Remover resultados de busca anteriores se existirem
         if (document.querySelector('.search-results-container')) {
@@ -514,8 +515,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchNowPlayingMovies();
     // Popular o select de gênero
     populateGenreSelect();
-});
-   
+
     // Check URL for genre parameter
     const urlParams = new URLSearchParams(window.location.search);
     const genreParam = urlParams.get('genre');
@@ -559,20 +559,28 @@ async function populateGenreSelect() {
 async function handleGenreChange() {
     const genreSelect = document.getElementById('genre-select');
     const selectedGenre = genreSelect.value;
-  
+ 
     // Helper to toggle sections visibility
     function toggleSections(showGenreSection) {
-        const sections = [
+        // Esconder TODAS as sections de conteúdo primeiro
+        const allSections = [
             document.getElementById('trending-movies').parentElement,
             document.getElementById('trending-tv').parentElement,
-            document.getElementById('weekly-trending').parentElement
+            document.getElementById('weekly-movies').parentElement,
+            document.getElementById('weekly-tv').parentElement,
+            document.getElementById('now-playing-movies').parentElement
         ];
         const genreSection = document.getElementById('genre-movies').parentElement;
-        
-        sections.forEach(section => {
-            section.style.display = showGenreSection ? 'none' : 'block';
+       
+        // Esconder todas sections primeiro
+        allSections.forEach(section => {
+            section.style.display = 'none';
         });
-        genreSection.style.display = showGenreSection ? 'block' : 'none';
+       
+        // Mostrar apenas a section de gênero se houver seleção
+        if (showGenreSection && genreSection) {
+            genreSection.style.display = 'block';
+        }
     }
   
     if (!selectedGenre) {
@@ -582,7 +590,8 @@ async function handleGenreChange() {
         // Show loading in trending sections and reload them
         document.getElementById('trending-movies').innerHTML = '<p class="loading">Carregando...</p>';
         document.getElementById('trending-tv').innerHTML = '<p class="loading">Carregando...</p>';
-        document.getElementById('weekly-trending').innerHTML = '<p class="loading">Carregando...</p>';
+        document.getElementById('weekly-movies').innerHTML = '<p class="loading">Carregando...</p>';
+        document.getElementById('weekly-tv').innerHTML = '<p class="loading">Carregando...</p>';
       
         // Remove any existing search results
         if (document.querySelector('.search-results-container')) {
