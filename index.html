@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Flix - O que está em alta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Stream Flix</h1>
+        <p>Descubra o que está em alta nos streams</p>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar filmes, séries ou gêneros...">
+            <button id="search-button">Buscar</button>
+        </div>
+        <div class="genre-container">
+            <label for="genre-select">Gênero:</label>
+            <select id="genre-select">
+                <option value="">Todos os gêneros</option>
+            </select>
+        </div>
+    </div>
+
+    <main>
+        <section class="category">
+            <h2>Em Alta Hoje</h2>
+            <div class="movies-container" id="trending-movies">
+                <!-- Movies will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <section class="category">
+            <h2>Séries Populares</h2>
+            <div class="movies-container" id="trending-tv">
+                <!-- TV shows will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <section class="category">
+                    <h2>Em Alta Esta Semana - Filmes</h2>
+                    <div class="movies-container" id="weekly-movies">
+                        <!-- Movies will be inserted here by JavaScript -->
+                    </div>
+                    <h2>Em Alta Esta Semana - Séries</h2>
+                    <div class="movies-container" id="weekly-tv">
+                        <!-- TV shows will be inserted here by JavaScript -->
+                    </div>
+                </section>
+
+        <section class="category">
+            <h2>Top 10 por Gênero</h2>
+            <div class="movies-container" id="genre-movies">
+                <!-- Movies will be inserted here by JavaScript -->
+            </div>
+            <div class="movies-container" id="genre-tv">
+                <!-- TV shows will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para detalhes -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-details">
+                <!-- Conteúdo será inserido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
