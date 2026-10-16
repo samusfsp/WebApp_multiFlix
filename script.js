@@ -391,6 +391,18 @@ async function fetchWeeklyTrending() {
         showError(document.getElementById('weekly-tv'), error.message);
     }
 }
+
+// Função para buscar filmes em cartaz nos cinemas
+async function fetchNowPlayingMovies() {
+    try {
+        const response = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=pt-BR&page=1`);
+        if (!response.ok) throw new Error('Erro ao buscar filmes em cartaz');
+        const data = await response.json();
+        displayMovies(data.results.slice(0, 20), document.getElementById('now-playing-movies'), 'movie');
+    } catch (error) {
+        showError(document.getElementById('now-playing-movies'), error.message);
+    }
+}
 function showError(container, message) {
     container.innerHTML = `<p class="error">Erro: ${message}</p>`;
 }
@@ -498,7 +510,11 @@ searchInput.addEventListener('keypress', (e) => {
 document.addEventListener('DOMContentLoaded', async () => {
     // Buscar gêneros primeiro
     await fetchGenres();
-    await populateGenreSelect();
+    // Buscar filmes em cartaz
+    await fetchNowPlayingMovies();
+    // Popular o select de gênero
+    populateGenreSelect();
+});
    
     // Check URL for genre parameter
     const urlParams = new URLSearchParams(window.location.search);
